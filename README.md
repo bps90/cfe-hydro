@@ -99,4 +99,4 @@ Caso o processo para a reprodução de todos os experimento não seja possível 
 
 # LICENSE
 
-Apresente a licença.
+Este software está sob a _licença-MIT_. Para mais informações, leia o arquivo `LICENSE`.
