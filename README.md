@@ -16,10 +16,10 @@ O protocolo opera na camada de aplicação, utilizando MQTT como transporte, rep
 
 # Estrutura do readme.md
 
-│   LICENSE.md
-│   README.md
-│
-├───charts
+│   LICENSE.md\
+│   README.md\
+│\
+├───charts\
 │       Gráfico 1.tex
 │       Gráfico 4.tex
 │       Gráfico 5.tex
