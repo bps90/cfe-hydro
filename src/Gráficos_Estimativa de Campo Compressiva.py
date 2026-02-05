@@ -1,3 +1,7 @@
+"""
+Função: Gerar gráficos das leituras sensoriadas, armazenadas no dataset dataset_cfe-hydro.csv
+        e salvar os dados das análises no arquivo resultados_interpolacao.csv
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -352,6 +356,7 @@ df_resultados = pd.DataFrame({
 })
 
 # Salvar resultados
-df_resultados.to_csv('resultados_interpolacao.csv', index=False, float_format='%.3f')
-print(f"\nResultados salvos em 'resultados_interpolacao.csv'")
+df_resultados.to_csv('./data/resultados_interpolacao.csv', index=False, float_format='%.3f')
+print(f"\nResultados salvos em './data/resultados_interpolacao.csv'")
 print(f"Arquivo contém {len(df_resultados)} linhas com dados de interpolação")
+
