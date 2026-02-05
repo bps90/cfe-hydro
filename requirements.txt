@@ -1,0 +1,8 @@
+# Dependências principais para execução dos scripts de análise
+pandas>=1.5.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+
+# Dependências opcionais para funcionalidades avançadas
+scipy>=1.10.0
+scikit-learn>=1.3.0
