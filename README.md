@@ -31,7 +31,7 @@ O protocolo opera na camada de aplicação, utilizando MQTT como transporte, rep
 ├── referencias  
 ├── src  
 │   ├── Analisa dados sensoriados.py
-│   ├── graficos_resultados.py
+│   ├── Gráficos_Resultados.py
 │   ├── Gráficos_Estimativa de Campo Compressiva.py
 │   └── data
 │       ├── dataset_cfe-hydro.csv  
