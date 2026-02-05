@@ -11,35 +11,33 @@ A avaliação experimental com dados reais de um sistema hidropônico comercial 
 
 O protocolo opera na camada de aplicação, utilizando MQTT como transporte, representando uma contribuição prática para o avanço da agricultura de precisão e IoT em cenários com conectividade limitada.
 
-# Estrutura do readme.md
+# Estrutura do repositório
 
-│   LICENSE.md\
-│   README.md\
-│\
-├───charts\
-│    Gráfico 1.tex\
-│    Gráfico 4.tex\
-│    Gráfico 5.tex\
-│    Gráfico 6.tex\
-│    Gráfico 7.tex\
-│\
-├───images\
-│       Figura 1.Interpolação Linear vs Interpolação Logarítmica.png\
-│       Figura 2.Visão geral do funcionamento do CFE-HYDRO.png\
-│       Figura 3.Estrutura do pacote CFE-HDP.png\
-│       Figura 4.Reconstrução quantitativa da série temporal de CE.png\
-│       Figura 5.Convegência do RMSE normalizado.png\
-│       Figura 6.Capacidade preditiva do sinal transmitido.png\
-│       Figura 7.Impacto da Esparsidade na Precisão.png\
-│\
-└───src\
-    │   Analisa dados sensoriados.py\
-    │   graficos_resultados.py\
-    │   Gráficos_Estimativa de Campo Compressiva.py\
-    │\
-    └───data\
-            dataset_cfe-hydro.csv\
-            resultados_simulacao.csv\
+```
+├── charts  
+│   ├── Gráfico 1.tex
+│   ├── Gráfico 2.tex
+│   ├── Gráfico 3.tex
+│   ├── Gráfico 4.tex
+│   └── Gráfico 5.tex
+├── images  
+│   ├── Figura 1.Interpolação Linear vs Interpolação Logarítmica.png
+│   ├── Figura 2.Visão geral do funcionamento do CFE-HYDRO.png
+│   ├── Figura 3.Estrutura do pacote CFE-HDP.png
+│   ├── Figura 4.Reconstrução quantitativa da série temporal de CE.png
+│   ├── Figura 5.Convegência do RMSE normalizado.png
+│   ├── Figura 6.Capacidade preditiva do sinal transmitido.png
+│   └── Figura 7.Impacto da Esparsidade na Precisão.png
+├── src  
+│   ├── Analisa dados sensoriados.py
+│   ├── graficos_resultados.py
+│   ├── Gráficos_Estimativa de Campo Compressiva.py
+│   └── data
+│       ├── dataset_cfe-hydro.csv  
+│       └── resultados_simulacao.csv  
+├── LICENSE  
+└── README  
+```
 
 # Selos Considerados
 
