@@ -615,7 +615,7 @@ class AnalisadorInterpolacaoCorrigido:
                         ax.legend(fontsize=8)
             
             plt.tight_layout()
-            plt.savefig('evolucao_temporal_parametros.png', dpi=300, bbox_inches='tight')
+            plt.savefig('./images/evolucao_temporal_parametros.png', dpi=300, bbox_inches='tight')
             print("Gráfico 1 salvo: 'evolucao_temporal_parametros.png'")
             
             # Gráfico 2: Distribuição dos parâmetros
@@ -642,7 +642,7 @@ class AnalisadorInterpolacaoCorrigido:
                         ax.legend()
             
             plt.tight_layout()
-            plt.savefig('distribuicao_parametros.png', dpi=300, bbox_inches='tight')
+            plt.savefig('./images/distribuicao_parametros.png', dpi=300, bbox_inches='tight')
             print("Gráfico 2 salvo: 'distribuicao_parametros.png'")
             
             # Gráfico 3: Métricas R² por intervalo
@@ -675,7 +675,7 @@ class AnalisadorInterpolacaoCorrigido:
                 ax.axhline(y=0.9, color='orange', linestyle='--', alpha=0.7, label='R² = 0.9 (Alta qualidade)')
                 ax.axhline(y=0.8, color='yellow', linestyle='--', alpha=0.7, label='R² = 0.8 (Qualidade aceitável)')
                 
-                plt.savefig('r2_por_intervalo.png', dpi=300, bbox_inches='tight')
+                plt.savefig('./images/r2_por_intervalo.png', dpi=300, bbox_inches='tight')
                 print("Gráfico 3 salvo: 'r2_por_intervalo.png'")
             
             # Gráfico 4: RMSE por intervalo
@@ -703,7 +703,7 @@ class AnalisadorInterpolacaoCorrigido:
                 ax.grid(True, alpha=0.3)
                 ax.legend()
                 
-                plt.savefig('rmse_por_intervalo.png', dpi=300, bbox_inches='tight')
+                plt.savefig('./images/rmse_por_intervalo.png', dpi=300, bbox_inches='tight')
                 print("Gráfico 4 salvo: 'rmse_por_intervalo.png'")
             
             # Gráfico 5: Boxplot dos parâmetros originais (CORREÇÃO DO WARNING)
@@ -727,7 +727,7 @@ class AnalisadorInterpolacaoCorrigido:
                 ax.grid(True, alpha=0.3)
                 plt.xticks(rotation=45)
                 
-                plt.savefig('boxplot_parametros.png', dpi=300, bbox_inches='tight')
+                plt.savefig('./images/boxplot_parametros.png', dpi=300, bbox_inches='tight')
                 print("✅ Gráfico 5 salvo: 'boxplot_parametros.png'")
             
             # Gráfico 6: Eficiência por intervalo (novo)
@@ -762,7 +762,7 @@ class AnalisadorInterpolacaoCorrigido:
                             bars[melhor_idx].set_linewidth(2)
                 
                 plt.tight_layout()
-                plt.savefig('eficiencia_por_intervalo.png', dpi=300, bbox_inches='tight')
+                plt.savefig('./images/eficiencia_por_intervalo.png', dpi=300, bbox_inches='tight')
                 print("Gráfico 6 salvo: 'eficiencia_por_intervalo.png'")
             
             print("Todos os gráficos gerados com sucesso!")
@@ -835,4 +835,5 @@ def criar_dataset_exemplo(arquivo):
 
 if __name__ == "__main__":
     analisador = main()
+
 
