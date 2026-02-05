@@ -30,12 +30,20 @@ O protocolo opera na camada de aplicação, utilizando MQTT como transporte, rep
 │   └── Figura 7.Impacto da Esparsidade na Precisão.png
 ├── referencias  
 ├── src  
-│   ├── Analisa dados sensoriados.py
-│   ├── Gráficos_Resultados.py
-│   ├── Gráficos_Estimativa de Campo Compressiva.py
-│   └── data
-│       ├── dataset_cfe-hydro.csv  
-│       └── resultados_simulacao.csv  
+│   ├── Analise_estatistica_dados_sensoriados.py
+│   ├── Graficos_Estimativa_de_Campo_Compressiva.py
+│   ├── Graficos_Resultados.py
+│   ├── data
+│       ├── dataset_cfe-hydro.csv
+│       ├── resultados_interpolacao.csv
+│       └── resultados_simulacao.csv
+│   ├── images
+│       ├── boxplot_parametros.png
+│       ├── distribuicao_parametros.png
+│       ├── eficiencia_por_intervalo.png
+│       ├── evolucao_temporal_parametros.png
+│       ├── r2_por_intervalo.png
+│       └── rmse_por_intervalo.png
 ├── LICENSE  
 └── README  
 ```
