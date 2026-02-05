@@ -1,6 +1,5 @@
 """
-Função: Analisar os dados sensoriados, armazenados no dataset
-        e gerar estatísticas e gráficos
+Função: Analisa os dados sensoriados, armazenados no dataset './data/resultados_simulacao.csv' e gera estatísticas e gráficos
 """
 
 import os
@@ -836,3 +835,4 @@ def criar_dataset_exemplo(arquivo):
 
 if __name__ == "__main__":
     analisador = main()
+
