@@ -88,7 +88,7 @@ Caso a execução do artefato ofereça algum tipo de risco para os avaliadores. 
 2.  **Crie um ambiente virtual (recomendado):**
 
     ```bash
-    python3 -m venv .venv
+    python -m venv .venv
     source .venv/bin/activate   # Linux/macOS
     .venv\Scripts\activate      # Windows
     ```
