@@ -1,10 +1,10 @@
 # CFE-HYDRO
 
-Título:
+## Título:
 
 CFE-HYDRO: Um Protocolo Leve para Reconstrução Progressiva de Sinais Hidropônicos sob Restrições de Comunicação
 
-Resumo:
+## Resumo:
 
 O artigo propõe o protocolo CFE-HYDRO, uma solução leve para o monitoramento em tempo real de parâmetros físico-químicos em sistemas hidropônicos, como pH, temperatura e condutividade elétrica, que enfrentam severas restrições de banda e energia em ambientes agrícolas com infraestrutura de comunicação limitada. O objetivo principal do artefato é permitir a aquisição, transmissão e reconstrução eficiente de séries temporais densas, mesmo quando a taxa de transmissão é inferior à taxa de amostragem dos sensores.
 
