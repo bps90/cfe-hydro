@@ -56,16 +56,18 @@ Para mais detalhes sobre configuração, dependências e exemplos de uso, consul
 
 # Dependências
 
-Informações relacionadas a benchmarks utilizados e dependências para a execução devem ser descritas nesta seção. 
-Busque deixar o mais claro possível, apresentando informações como versões de dependências e processos para acessar recursos de terceiros caso necessário.
+Os benchmarks foram realizados em ambiente Python 3.9+, mas versões 3.8+ são compatíveis.
+O dataset necessário (dataset_cfe-hydro.csv) está disponível no diretório ./data/ do repositório.
+Para a instalação das dependências, executar o seguinte comando:
+pip install -r requirements.txt
 
 ## Justificativa das dependências:
+   - pandas: Utilizado para manipulação de dados CSV e DataFrames em todos os scripts
+   - numpy: Necessário para cálculos numéricos, operações com arrays e geração de dados
+   - matplotlib: Essencial para geração de gráficos 2D e 3D (inclui mpl_toolkits para gráficos 3D)
+   - scipy: Opcional, mas recomendado para funções de interpolação mais avançadas
+   - scikit-learn: Opcional, mas recomendado para cálculo de métricas (R², RMSE) com maior precisão
 
-   - ** pandas:** Utilizado para manipulação de dados CSV e DataFrames em todos os scripts
-   - ** numpy:** Necessário para cálculos numéricos, operações com arrays e geração de dados
-   - ** matplotlib:** Essencial para geração de gráficos 2D e 3D (inclui mpl_toolkits para gráficos 3D)
-   - ** scipy:** Opcional, mas recomendado para funções de interpolação mais avançadas
-   - ** scikit-learn:** Opcional, mas recomendado para cálculo de métricas (R², RMSE) com maior precisão
 ** Observação:** As versões especificadas são mínimas recomendadas. Os scripts foram desenvolvidos e testados com essas versões ou superiores.
 
 # Preocupações com segurança
