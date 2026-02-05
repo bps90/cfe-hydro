@@ -1,5 +1,5 @@
 # CFE-HYDRO: Um Protocolo Leve para Reconstrução Progressiva de Sinais Hidropônicos sob Restrições de Comunicação
-[Visão geral do CFE-HYDRO](./images/Figura 2.Visão geral do funcionamento do CFE-HYDRO.png)
+[Visão geral do CFE-HYDRO](images/Figura 2.Visão geral do funcionamento do CFE-HYDRO.png)
 
 ## Resumo:
 
