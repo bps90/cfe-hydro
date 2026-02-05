@@ -47,11 +47,11 @@ Os autores devem descrever quais selos devem ser considerados no processo de ava
 
 O CFE-HYDRO foi projetado para aquisição, transmissão e reconstrução eficiente de séries temporais de parâmetros hidropônicos (como pH, temperatura e condutividade elétrica) sob restrições de comunicação. Para a execução e replicação dos experimentos, é necessário um ambiente composto por:
 
-** Hardware:** Dispositivos de sensoriamento compatíveis com leituras de parâmetros físico-químicos (ex.: sensores de pH, condutividade, temperatura e oxigênio dissolvido), conectados a um sistema de borda (ex.: Raspberry Pi, microcontrolador com conectividade Wi-Fi ou rede de baixo consumo).
+**Hardware:** Dispositivos de sensoriamento compatíveis com leituras de parâmetros físico-químicos (ex.: sensores de pH, condutividade, temperatura e oxigênio dissolvido), conectados a um sistema de borda (ex.: Raspberry Pi, microcontrolador com conectividade Wi-Fi ou rede de baixo consumo).
 
-** Software:** Implementação do protocolo em linguagem compatível com ambientes IoT (ex.: Python ou C++), utilizando bibliotecas para processamento de sinais (ex.: NumPy, SciPy) e comunicação via MQTT. O protocolo opera sobre um broker MQTT (ex.: Mosquitto) para gerência de mensagens. Os scripts de reconstrução empregam técnicas de Compressive Sensing (CS) e interpolação seletiva (linear, logarítmica, polinomial ou sigmoidal), conforme os metadados transmitidos.
+**Software:** Implementação do protocolo em linguagem compatível com ambientes IoT (ex.: Python ou C++), utilizando bibliotecas para processamento de sinais (ex.: NumPy, SciPy) e comunicação via MQTT. O protocolo opera sobre um broker MQTT (ex.: Mosquitto) para gerência de mensagens. Os scripts de reconstrução empregam técnicas de Compressive Sensing (CS) e interpolação seletiva (linear, logarítmica, polinomial ou sigmoidal), conforme os metadados transmitidos.
 
-** Dados:** Séries temporais reais de um sistema hidropônico comercial, com amostragem a cada 5 minutos e transmissão a cada 15 minutos, conforme descrito na avaliação experimental.
+**Dados:** Séries temporais reais de um sistema hidropônico comercial, com amostragem a cada 5 minutos e transmissão a cada 15 minutos, conforme descrito na avaliação experimental.
 Para mais detalhes sobre configuração, dependências e exemplos de uso, consulte a documentação no repositório.
 
 # Dependências
@@ -68,7 +68,7 @@ pip install -r requirements.txt
    - scipy: Opcional, mas recomendado para funções de interpolação mais avançadas
    - scikit-learn: Opcional, mas recomendado para cálculo de métricas (R², RMSE) com maior precisão
 
-** Observação:** As versões especificadas são mínimas recomendadas. Os scripts foram desenvolvidos e testados com essas versões ou superiores.
+**Observação:** As versões especificadas são mínimas recomendadas. Os scripts foram desenvolvidos e testados com essas versões ou superiores.
 
 # Preocupações com segurança
 
