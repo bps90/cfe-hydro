@@ -28,6 +28,7 @@ O protocolo opera na camada de aplicação, utilizando MQTT como transporte, rep
 │   ├── Figura 5.Convegência do RMSE normalizado.png
 │   ├── Figura 6.Capacidade preditiva do sinal transmitido.png
 │   └── Figura 7.Impacto da Esparsidade na Precisão.png
+├── referencias  
 ├── src  
 │   ├── Analisa dados sensoriados.py
 │   ├── graficos_resultados.py
