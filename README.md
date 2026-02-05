@@ -6,7 +6,7 @@ CFE-HYDRO: Um Protocolo Leve para Reconstrução Progressiva de Sinais Hidropôn
 
 ## Resumo:
 
-O artigo propõe o protocolo CFE-HYDRO, uma solução leve para o monitoramento em tempo real de parâmetros físico-químicos em sistemas hidropônicos, como pH, temperatura e condutividade elétrica, que enfrentam severas restrições de banda e energia em ambientes agrícolas com infraestrutura de comunicação limitada. O objetivo principal do artefato é permitir a aquisição, transmissão e reconstrução eficiente de séries temporais densas, mesmo quando a taxa de transmissão é inferior à taxa de amostragem dos sensores.
+O artigo propõe o protocolo CFE-HYDRO, uma solução leve para o monitoramento em tempo real de parâmetros físico-químicos em sistemas hidropônicos (como pH, temperatura, condutividade elétrica e Oxigênio dissolvido), que enfrentam restrições de banda e energia em ambientes agrícolas com infraestrutura de comunicação limitada. O objetivo principal do artefato é permitir a aquisição, transmissão e reconstrução eficiente de séries temporais densas, mesmo quando a taxa de transmissão é inferior à taxa de amostragem dos sensores.
 
 O protocolo fundamenta-se nos princípios da Estimativa de Campo Compressiva (CFE), realizando a amostragem em alta frequência, mas transmitindo apenas um subconjunto aleatório das medições. A inovação central está na incorporação de metadados semânticos que descrevem a natureza do sinal (ex.: logarítmica, sigmoidal, polinomial), permitindo que o receptor selecione e aplique automaticamente o modelo de interpolação ou reconstrução mais adequado (linear, logarítmico, etc.), em vez de depender de interpoladores lineares genéricos.
 
