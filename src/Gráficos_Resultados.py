@@ -1,7 +1,5 @@
 """
-Função: Analisa resultados da simulação de interpolações com
-        diferentes intervalos de amostras e mostra estatísticas
-        e gráficos
+Função: Analisa resultados da simulação de interpolações com diferentes intervalos de amostras e mostra estatísticas e gráficos
 """
 
 import pandas as pd
@@ -576,3 +574,4 @@ print(f"• Gráficos 3D gerados: 8")
 print(f"• Gráficos 2D adicionais: 2")
 print(f"• Todos os gráficos salvos em: '{output_dir}/'")
 print(f"• Análise estatística completa realizada")
+
