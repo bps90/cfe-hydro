@@ -59,6 +59,7 @@ Para mais detalhes sobre configuração, dependências e exemplos de uso, consul
 Os benchmarks foram realizados em ambiente Python 3.9+, mas versões 3.8+ são compatíveis.
 O dataset necessário (dataset_cfe-hydro.csv) está disponível no diretório ./data/ do repositório.
 Para a instalação das dependências, executar o seguinte comando:
+
 pip install -r requirements.txt
 
 ## Justificativa das dependências:
@@ -68,7 +69,7 @@ pip install -r requirements.txt
    - scipy: Opcional, mas recomendado para funções de interpolação mais avançadas
    - scikit-learn: Opcional, mas recomendado para cálculo de métricas (R², RMSE) com maior precisão
 
-**Observação:** As versões especificadas são mínimas recomendadas. Os scripts foram desenvolvidos e testados com essas versões ou superiores.
+**Observação:** As versões especificadas são as mínimas recomendadas. Os scripts foram desenvolvidos e testados com essas versões ou superiores.
 
 # Preocupações com segurança
 
