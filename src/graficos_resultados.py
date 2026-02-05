@@ -542,37 +542,3 @@ plt.tight_layout()
 plt.savefig(f'{output_dir}/evolucao_r2.png', dpi=300, bbox_inches='tight')
 print(f"  • Gráfico de evolução do R² salvo: {output_dir}/evolucao_r2.png")
 plt.show()
-
-# ===================================================================
-# 8. RESUMO E RECOMENDAÇÕES
-# ===================================================================
-
-print("\n" + "="*60)
-print("RESUMO E RECOMENDAÇÕES")
-print("="*60)
-
-print("\n1. RESUMO DOS RESULTADOS:")
-print(f"   • Total de intervalos analisados: {len(intervalos)}")
-print(f"   • Percentual de transmissão variando de {percentuais[0]:.0f}% a {percentuais[-1]:.0f}%")
-print(f"   • Parâmetros analisados: Temperatura, pH, EC, OD")
-
-print("\n2. COMPORTAMENTO POR PARÂMETRO:")
-print("   • Temperatura: RMSE aumenta gradualmente com redução da transmissão")
-print("   • pH: Mantém RMSE baixo (0.0) na maioria dos intervalos, exceto intervalo 2")
-print("   • EC: Mostra maior variação de RMSE entre intervalos")
-print("   • OD: Aumento consistente e quase linear do RMSE")
-
-print("\n3. RECOMENDAÇÕES PARA TRANSMISSÃO:")
-print("   • Para Temperatura e OD: Manter acima de 50% de transmissão para RMSE < 0.1")
-print("   • Para pH: Pode reduzir significativamente a transmissão sem grande impacto")
-print("   • Para EC: Necessário monitoramento mais cuidadoso devido à maior variação")
-print("   • Intervalo ideal: 3-5 (33-20% de transmissão) para equilíbrio qualidade/eficiência")
-
-print("\n" + "="*60)
-print("EXECUÇÃO COMPLETADA COM SUCESSO!")
-print("="*60)
-print(f"• Resultados processados: {len(df_resultados)} intervalos")
-print(f"• Gráficos 3D gerados: 8")
-print(f"• Gráficos 2D adicionais: 2")
-print(f"• Todos os gráficos salvos em: '{output_dir}/'")
-print(f"• Análise estatística completa realizada")
