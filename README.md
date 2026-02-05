@@ -78,7 +78,26 @@ Caso a execução do artefato ofereça algum tipo de risco para os avaliadores. 
 
 # Instalação
 
-O processo de baixar e instalar a aplicação deve ser descrito nesta seção. Ao final deste processo já é esperado que a aplicação/benchmark/ferramenta consiga ser executada.
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/bps90/cfe-hydro.git
+    cd cfe-hydro
+    ```
+
+2.  **Crie um ambiente virtual (recomendado):**
+
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate   # Linux/macOS
+    .venv\Scripts\activate      # Windows
+    ```
+
+3.  **Instale as dependências:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 # Teste mínimo
 
