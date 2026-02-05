@@ -20,11 +20,11 @@ O protocolo opera na camada de aplicação, utilizando MQTT como transporte, rep
 │   README.md\
 │\
 ├───charts\
-│       Gráfico 1.tex\
-│       Gráfico 4.tex\
-│       Gráfico 5.tex\
-│       Gráfico 6.tex\
-│       Gráfico 7.tex\
+│    Gráfico 1.tex\
+│    Gráfico 4.tex\
+│    Gráfico 5.tex\
+│    Gráfico 6.tex\
+│    Gráfico 7.tex\
 │\
 ├───images\
 │       Figura 1.Interpolação Linear vs Interpolação Logarítmica.png\
