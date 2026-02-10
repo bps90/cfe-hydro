@@ -1,0 +1,66 @@
+{
+  "protocol": "CFE-HYDRO",
+  "version": "1.0",
+  "device_id": "ESP32_Hydro_01",
+  "transmission_timestamp": 1738800000000, // Timestamp
+  "sampling_interval": 30000,
+  "transmission_interval": 60000,
+  "timezone": "UTC-3",
+  
+  "readings": [
+    {
+      "sensor_type": "temperature",
+      "value": 22.5,
+      "timestamp": 1738800000000, // Timestamp
+      "interpolation": "linear",
+      "metadata": {
+        "unit": "°C",
+        "description": "Temperatura",
+        "optimal_min": 18.0,
+        "optimal_max": 25.0
+      }
+    },
+    {
+      "sensor_type": "ph",
+      "value": 6.2,
+      "timestamp": 1738800000000, // Timestamp
+      "interpolation": "logarithmic",
+      "metadata": {
+        "unit": "pH",
+        "description": "Potencial hidrogeniônico",
+        "optimal_min": 5.5,
+        "optimal_max": 6.5
+      }
+    },
+    {
+      "sensor_type": "ec",
+      "value": 2.5,
+      "timestamp": 1738800000000, // Timestamp
+      "interpolation": "polynomial",
+      "metadata": {
+        "unit": "mS/cm",
+        "description": "Condutividade elétrica",
+        "optimal_min": 1.0,
+        "optimal_max": 3.0
+      }
+    },
+    {
+      "sensor_type": "do",
+      "value": 6.5,
+      "timestamp": 1738800000000, // Timestamp
+      "interpolation": "polynomial",
+      "metadata": {
+        "unit": "mg/L",
+        "description": "Oxigênio dissolvido",
+        "optimal_min": 5.0,
+        "optimal_max": 8.0
+      }
+    }
+  ],
+  
+  "system": {
+    "free_heap": 123456, // Memória heap livre
+    "wifi_rssi": -65,    // Intensidade do sinal WiFi
+    "uptime": 3600       // Tempo de funcionamento em segundos
+  }
+}
