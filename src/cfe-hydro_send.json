@@ -59,8 +59,8 @@
   ],
   
   "system": {
-    "free_heap": 123456, // Memória heap livre
-    "wifi_rssi": -65,    // Intensidade do sinal WiFi
+    "free_heap": 214363, // Memória heap livre
+    "wifi_rssi": -31,    // Intensidade do sinal WiFi
     "uptime": 3600       // Tempo de funcionamento em segundos
   }
 }
