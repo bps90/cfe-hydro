@@ -22,6 +22,34 @@ css = '''
         padding-bottom: 0rem;
         margin-top: 0rem;
     }
+
+    h2 {
+        font-size: 30px !important;
+        padding-top: 0rem;
+        margin-top: 0rem !important;
+    }
+
+    h3 {
+        font-size: 20px !important;
+        padding-top: 0rem !important;
+        margin-top: 0rem !important;
+    }
+
+    /* Change background and font color of tabs */
+    .stTabs [data-baseweb="tab-list"] {gap: 6px;}
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        background-color: #F0F2F6;
+        border-radius: 3px 3px 2px 2px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    /* Style the active tab */
+    .stTabs [aria-selected="true"] {
+        background-color: #FFFFFF;
+        color: #FF4B4B;
+    }
+    
 </style>
 '''
 st.markdown(css, unsafe_allow_html=True)
@@ -418,16 +446,70 @@ def exibir_tabela_dados(dados_combinados, info_sensor):
     )
     
     # Legenda
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("📥 **Dados Recebidos do Broker**", unsafe_allow_html=True)
-    with col2:
-        st.markdown("📊 **Dados Interpolados**", unsafe_allow_html=True)
+#    col1, col2 = st.columns(2)
+#    with col1:
+#        st.markdown("📥 **Dados Recebidos do Broker**", unsafe_allow_html=True)
+#    with col2:
+#        st.markdown("📊 **Dados Interpolados**", unsafe_allow_html=True)
+
+    # LEGENDAS COM BOXES COLORIDOS - APENAS AS LEGENDAS
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col3:
+        # Box para Dados Recebidos
+        st.markdown(
+            '''
+            <div style="
+                background-color: #E8F5E9; 
+                padding: 3px; 
+                border-radius: 8px; 
+                border: 0px solid #4CAF50; 
+                text-align: center;
+                display: flex;
+                align-items: right;
+                justify-content: center;
+                min-height: 30px;
+                margin: 2px 0;
+                width: 100%;
+            ">
+                <div style="font-size: 16px; font-weight: bold;">
+                    📥 Dados Recebidos do Broker
+                </div>
+            </div>
+            ''',
+            unsafe_allow_html=True
+        )
+    
+    with col4:
+        # Box para Dados Interpolados
+        st.markdown(
+            '''
+            <div style="
+                background-color: #FFF3E0; 
+                padding: 3px; 
+                border-radius: 8px; 
+                border: 0px solid #FF9800; 
+                text-align: center;
+                display: flex;
+                align-items: right;
+                justify-content: center;
+                min-height: 30px;
+                margin: 2px 0;
+                width: 100%;
+            ">
+                <div style="font-size: 16px; font-weight: bold;">
+                    📊 Dados Interpolados
+                </div>
+            </div>
+            ''',
+            unsafe_allow_html=True
+        )
+        
 
 # ================= APLICAÇÃO PRINCIPAL =================
 def main():
-    st.title("🌱 Dashboard CFE-HYDRO - Monitoramento Hidropônico")
-    st.markdown("Sistema de monitoramento em tempo real com **interpolação seletiva** conforme protocolo CFE-HYDRO.")
+    st.title("🌱 CFE-HYDRO - Monitoramento")
+    st.markdown("Sistema de monitoramento com **interpolação seletiva** usando o protocolo CFE-HYDRO.")
     
     # Inicializar estado da sessão
     if 'gerenciador_dados' not in st.session_state:
@@ -464,7 +546,7 @@ def main():
                     st.session_state.cliente_mqtt.conectar()
                     st.rerun()
         
-        st.divider()
+        # st.divider()
         
         # Configurações
         st.subheader("👁️ Configurações de Visualização")
@@ -489,7 +571,13 @@ def main():
             st.session_state.gerenciador_dados = GerenciadorDados()
             st.success("Dados limpos com sucesso!")
             st.rerun()
-    
+
+        st.caption(f"Última atualização: {datetime.now().strftime('%H:%M:%S')}")
+        if hasattr(st.session_state.cliente_mqtt, 'connected'):
+            status = "✅ Conectado" if st.session_state.cliente_mqtt.connected else "❌ Desconectado"
+            st.caption(f"Status MQTT: {status}")
+            st.caption(f"Atualização automática: {st.session_state.intervalo_atualizacao}s")
+
     # Métricas em tempo real
     st.header("📈 Últimos valores recebidos")
     colunas = st.columns(4)
@@ -596,9 +684,9 @@ def main():
                 else:
                     st.info(f"Aguardando dados do sensor {info['nome']}...")
         
-        # Análise de qualidade
+        # Análise da qualidade
         if any(v is not None for v in valores_recentes.values()):
-            st.header("🔍 Análise de Qualidade")
+            st.header("🔍 Análise Qualitativa da Interpolação")
             colunas = st.columns(5)
             qualidades = []
             
@@ -643,16 +731,12 @@ def main():
         st.session_state.ultima_atualizacao = datetime.now()
         st.rerun()
     
-    # Rodapé
-    st.divider()
-    col1, col2 = st.columns(2)
-    with col1:
-        st.caption(f"Dashboard CFE-HYDRO • Última atualização: {datetime.now().strftime('%H:%M:%S')}")
-        if hasattr(st.session_state.cliente_mqtt, 'connected'):
-            status = "✅ Conectado" if st.session_state.cliente_mqtt.connected else "❌ Desconectado"
-            st.caption(f"Status MQTT: {status}")
-    with col2:
-        st.caption(f"Atualização automática: {st.session_state.intervalo_atualizacao}s")
+#    with st.sidebar:
+#        st.caption(f"Última atualização: {datetime.now().strftime('%H:%M:%S')}")
+#        if hasattr(st.session_state.cliente_mqtt, 'connected'):
+#            status = "✅ Conectado" if st.session_state.cliente_mqtt.connected else "❌ Desconectado"
+#            st.caption(f"Status MQTT: {status}")
+#            st.caption(f"Atualização automática: {st.session_state.intervalo_atualizacao}s")
 
 if __name__ == "__main__":
     main()
