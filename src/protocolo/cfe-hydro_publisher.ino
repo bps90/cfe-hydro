@@ -4,6 +4,7 @@
    Placa : ESP32 Dev Module
    Função: Enviar dados sensoriados para o broker MQTT
            usando protocolo cfe-hydro.h
+   Versão: 1.01
    Date  : 25/02/2026 - 19:35h
    L.U.  : 26/02/2026 - 02:10h
    Referências:
@@ -158,8 +159,8 @@ String formatTimestamp() {
         
    // Obter a data completa do NTPClient
    String formattedDate = timeClient.getFormattedDate();
-        
    // O formato retornado é: "2026-02-06T22:48:00Z"
+
    // Extrair componentes
    String year = formattedDate.substring(0, 4);
    String month = formattedDate.substring(5, 7);
