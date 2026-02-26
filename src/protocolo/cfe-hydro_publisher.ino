@@ -5,7 +5,7 @@
    Função: Enviar dados sensoriados para o broker MQTT
            usando protocolo cfe-hydro.h
    Date  : 25/02/2026 - 19:35h
-   L.U.  : 23/02/2026 - 02:10h
+   L.U.  : 26/02/2026 - 02:10h
    Referências:
       - 
    Pendências:
