@@ -34,13 +34,13 @@ float ph = 0.00;
 float ec = 0.00;
 float od = 0.00;
 
-// Estancia Funções ===========================================
+// Instancia Funções ===========================================
 void setup_wifi();
 void reconnect();
 float rnd_float(int, int);
 String formatTimestamp();
 
-// Estancia Objetos ===========================================
+// Instancia Objetos ===========================================
 WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 // NTP
@@ -48,11 +48,14 @@ WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", -10800, 60000); // UTC-3 (Brasília): -3 * 3600 = -10800
 
 // Configuração estática dos sensores
+// Estrutura do SensorConfig:
+// {field_name, field_unit, field_label, value_min, value_max, interpolation}
 CFEHydro::SensorConfig sensores[] = {
-    {"temperatura", "°C", "Temperatura da Água", 18.0, 30.0, "linear"},
-    {"ph", "pH", "Nível de pH", 5.5, 7.0, "logarithmic"},
-    {"ec", "mS/cm", "EC", 0.0, 5.0, "polynomial"},
-    {"od", "mg/L", "OD", 0.0, 6.0, "polynomial"}
+   {"temperatura", "°C", "Temperatura", 18.0, 30.0, "linear"},
+   {"ph", "pH", "Nível de pH", 5.5, 7.0, "logarithmic"},
+   {"ec", "mS/cm", "EC", 0.0, 5.0, "polynomial"},
+   {"od", "mg/L", "OD", 0.0, 6.0, "polynomial"}
+   // Configurar todos os campos usados aqui.
 };
 int numSensores = sizeof(sensores) / sizeof(sensores[0]);
 
@@ -67,7 +70,7 @@ void setup() {
    mqttClient.setBufferSize(2048);
 
    timeClient.begin();
-}
+} // end setup()
 
 void loop() {
    if (!mqttClient.connected()) {
@@ -102,14 +105,14 @@ void loop() {
    hydro.setTimestamp(timestamp.c_str());
 
    // Envia os dados
-   if (hydro.send(mqttClient, mqtt_topic)) {
-      Serial.println("Dados enviados com sucesso");
-   } else {
+   if (!hydro.send(mqttClient, mqtt_topic)) {
       Serial.println("Falha no envio");
+   } else {
+      //Serial.println("Dados enviados com sucesso");
    }
 
    delay(interval);
-}
+} // end loop()
 
 void setup_wifi() {
     delay(10);
@@ -122,7 +125,7 @@ void setup_wifi() {
         Serial.print(".");
     }
     Serial.println("\nWiFi conectado");
-}
+} // setup_wifi()
 
 void reconnect() {
     while (!mqttClient.connected()) {
@@ -141,11 +144,12 @@ void reconnect() {
             delay(5000);
         }
     }
-}
+} // end reconnect()
 
+// Função para simular leitura de sensores
 float rnd_float(int min, int max) {
    return min + (float)random(1000)/999.0 * (max - min);
-}
+} // end rnd_float()
 
 // Função para formatar timestamp em string usando NTPClient
 String formatTimestamp() {
@@ -180,5 +184,4 @@ String formatTimestamp() {
    formatted += String(milliseconds);
         
    return formatted;
-}
-
+} // end formatTimestamp()
