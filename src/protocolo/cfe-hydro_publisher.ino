@@ -20,9 +20,9 @@
 #include <NTPClient.h>
 
 // Configurações de rede e MQTT ===============================
-const char* ssid = "AP DO PAI"; // "SEU_SSID";
-const char* password = "Vitor2005#"; // "SUA_SENHA";
-const char* mqtt_server = "test.mosquitto.org"; // "BROKER_EXEMPLO.com";
+const char* ssid = "SEU_SSID";
+const char* password = "SUA_SENHA";
+const char* mqtt_server = "BROKER_EXEMPLO.com";
 const int mqtt_port = 1883;
 const char* mqtt_topic = "cfe-hydro/data";
 
@@ -181,3 +181,4 @@ String formatTimestamp() {
         
    return formatted;
 }
+
