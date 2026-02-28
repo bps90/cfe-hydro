@@ -33,7 +33,8 @@ st.set_page_config(
 css = '''
 <style>
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p { font-size:1.2rem; }
-    .block-container { padding-top: 1.8rem; padding-bottom: 0rem; margin-top: 0rem; }
+    .block-container { padding-top: 1.5rem; padding-bottom: 0rem; margin-top: 0rem; }
+    h1 { margin-top: 0rem !important; padding-top: 0rem;}
     h2 { font-size: 30px !important; padding-top: 0rem; margin-top: 0rem !important; }
     h3 { font-size: 20px !important; padding-top: 0rem !important; margin-top: 0rem !important; }
     .stTabs [data-baseweb="tab-list"] {gap: 6px;}
@@ -189,6 +190,18 @@ class GerenciadorDados:
 
     def metadados(self, sensor_type):
         return self.sensor_metadata.get(sensor_type, {})
+
+    def ultimo_timestamp_dado(self):
+        with self.lock:
+            max_ts = None
+            for df in self.sensor_data.values():
+                if not df.empty:
+                    ts = df['timestamp'].max()
+                    if max_ts is None or ts > max_ts:
+                        max_ts = ts
+        if max_ts is not None:
+            return pd.to_datetime(max_ts, unit='ms', utc=True).tz_convert(LOCAL_TIMEZONE)
+        return None
 
 # ==================== CLIENTE MQTT (CORRIGIDO) ====================
 class ClienteMQTT:
@@ -415,7 +428,8 @@ def calcular_metricas_interpolacao(sensor_type, horas, interval_seconds, toleran
 # ==================== APLICAÇÃO PRINCIPAL ====================
 def main():
     st.title("🌱 CFE-HYDRO - Monitoramento")
-    st.markdown("Monitoramento com **interpolação seletiva** – metadados extraídos automaticamente.")
+    # st.markdown("Monitoramento com **interpolação seletiva** – metadados extraídos automaticamente.")
+    st.write("Monitoramento com **interpolação seletiva** – metadados extraídos automaticamente.")
 
     # Estado da sessão
     if 'gerenciador' not in st.session_state:
@@ -429,7 +443,7 @@ def main():
     # Sidebar
     with st.sidebar:
         st.header("⚙️ Configurações")
-        with st.expander("🔧 Broker MQTT", expanded=True):
+        with st.expander("🔧 Broker MQTT", expanded=False):
             broker = st.text_input("Servidor", value=st.session_state.broker)
             port = st.number_input("Porta", min_value=1, max_value=65535, value=st.session_state.port)
             if st.button("Testar conexão"):
@@ -454,8 +468,11 @@ def main():
             if st.session_state.cliente and st.session_state.cliente.connection_error:
                 st.caption(f"Erro: {st.session_state.cliente.connection_error}")
 
-        st.metric("Mensagens", st.session_state.gerenciador.messages_received)
-        st.metric("Sensores", len(st.session_state.gerenciador.tipos_sensor()))
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Mensagens", st.session_state.gerenciador.messages_received)
+        with col2:
+            st.metric("Sensores", len(st.session_state.gerenciador.tipos_sensor()))
 
         st.subheader("👁️ Visualização")
         
@@ -469,7 +486,17 @@ def main():
             st.session_state.gerenciador = GerenciadorDados()
             st.rerun()
 
-        st.caption(f"Última atualização: {datetime.now().strftime('%H:%M:%S')}")
+        # st.caption(f"Última atualização: {datetime.now().strftime('%H:%M:%S')}")
+        ultimo_dado = st.session_state.gerenciador.ultimo_timestamp_dado()
+        with st.expander("🔍 Detalhes"):
+            if ultimo_dado:
+                st.write(f"Última atualização: {ultimo_dado.strftime('%Y-%m-%d %H:%M:%S')}")
+            else:
+                st.write("Última atualização: Nenhuma")
+            st.write("Métricas:")
+            st.write("   * MAE (erro absoluto médio)")
+            st.write("   * MAPE (erro percentual médio)")
+            st.write("   * Acurácia (percentual de pontos interpolados com erro < 5%)")
 
     # Configura o auto refresh (em milissegundos) – usa o valor do slider
     st_autorefresh(interval=st.session_state.intervalo * 1000, key="auto-refresh")
@@ -556,15 +583,11 @@ def main():
                         st.info("Sem dados no período")
 
         # Análise qualitativa (agora baseada na precisão da interpolação)
-        # Métricas:
-        #    MAE (erro absoluto médio),
-        #    MAPE (erro percentual médio),
-        #    Acurácia (percentual de pontos interpolados com erro < 5%)
         if sensores:
             st.header("🔍 Qualidade da Interpolação")
             metricas_por_sensor = {}
             for sensor in sensores:
-                metricas = calcular_metricas_interpolacao(sensor, horas, interp_interval, tolerancia_percentual=5)
+                metricas = calcular_metricas_interpolacao(sensor, horas, interp_interval, tolerancia_percentual=0.05)
                 if metricas:
                     metricas_por_sensor[sensor] = metricas
 
@@ -595,3 +618,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
