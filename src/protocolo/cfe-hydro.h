@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
+// #define MQTT_MAX_PACKET_SIZE 2048
 #include <PubSubClient.h>
 
 #ifdef ESP32
@@ -20,7 +21,7 @@ public:
         float optimal_min;
         float optimal_max;
         const char* interpolation; // "linear", "logarithmic", "polynomial", "sigmoidal"
-        float value;                // leitura atual
+        float value;               // leitura atual
     };
 
     // Construtor para configuração dinâmica (sensores adicionados via addSensor)
