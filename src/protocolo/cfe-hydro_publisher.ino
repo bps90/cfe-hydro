@@ -22,7 +22,6 @@
 #include <WiFiUdp.h>
 #include <NTPClient.h>
 #include <ArduinoSort.h>
-#include <LiquidCrystal_I2C.h>
 
 // Configurações de rede e MQTT -------------------------------
 const char* mqtt_server = "test.mosquitto.org"; // "BROKER_EXEMPLO.com";
@@ -30,15 +29,13 @@ const int mqtt_port = 1883;
 const char* mqtt_topic = "cfe-hydro/data";
 
 // DEFINE VARIÁVEIS ===========================================
-int lcdColumns = 20;
-int lcdRows = 4;
 const int intervalo = 60000; // 1 min.
 unsigned long ultimoEnvio = millis(); // 0;
 String timestamp;
 bool wifi_connected = false;
 
 float tp_value = 0.00;
-const float tp_coef   = 12.9851;
+const float tp_coef   = 1.1985;
 const float tp_offSet = 0.00;
 
 float ec_value = 0.00;
@@ -46,11 +43,11 @@ const float ec_coef   = 0.9756;
 const float ec_offSet = 0.00;
 
 float ph_value = 0.00;
-const float ph_coef   = 6.3529;
+const float ph_coef   = 1.0529;
 const float ph_offSet = 0.00;
 
 float od_value = 0.00;
-const float od_coef   = 1.9355;
+const float od_coef   = 1.1551;
 const float od_offSet = 0.00;
 
 // INSTANCIA FUNÇÕES ===========================================
@@ -62,13 +59,8 @@ float Get_TP();
 float Get_EC();
 float Get_PH();
 float Get_OD();
-void LcdMsg(int, int, String);
 void Exibe_Valores_Serial();
-void Exibe_Valores_LCD();
 String formatTimestamp();
-
-// INSTANCIA OBJETOS ===========================================
-LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows); 
 
 // DEFINE PINOS ================================================
 #define TP_SENSOR_PIN 34
@@ -79,7 +71,7 @@ LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
 
 // ADC Configuration
 #define ADC_RESOLUTION 4095.0
-#define VREF 3.3 // 5.0 // 3.3
+#define VREF 3.3 // 5.0
 #define ADC_SAMPLES 50 // Deve ser > 10 amostras
 float myArray[ADC_SAMPLES];
 
@@ -106,14 +98,8 @@ CFEHydro hydro("dispositivo_001", 10, 60, sensores, numSensores);
 void setup() {
    Serial.begin(115200);
 
-   lcd.init();
-   lcd.backlight();
-   lcd.clear();
-   LcdMsg(0, 0, "Procolo CFE-Hydro");
-
    Serial.println("\n=== SISTEMA CFE-HYDRO ===");
    Serial.println("Inicializando...");
-   LcdMsg(0, 1, "Inicializando...");
 
    pinMode(STATUS_LED, OUTPUT);
    digitalWrite(STATUS_LED, LOW);
@@ -130,10 +116,6 @@ void setup() {
    timeClient.begin();
 
    Serial.println("Setup completo.\n");
-   lcd.clear();
-   LcdMsg(0, 0, "Setup completo.     ");
-   delay(500);
-   LcdMsg(0, 1, "Lendo sensores...   ");
 } // end setup()
 
 void loop() {
@@ -150,7 +132,6 @@ void loop() {
 
       // Exibe valores lidos
       Exibe_Valores_Serial();
-      Exibe_Valores_LCD();
       
       // Atualiza os valores no objeto
       hydro.updateSensor("temperatura", tp_value);
@@ -170,10 +151,8 @@ void loop() {
       // Envia os dados para o Broker
       if (!hydro.send(mqttClient, mqtt_topic)) {
          Serial.println("Falha no envio");
-         lcd.clear();
-         LcdMsg(0, 0, "Falha no envio.     ");
       } else {
-         // Serial.println("Dados enviados com sucesso");
+         Serial.println("Dados enviados com sucesso");
       }
    }
 } // end loop()
@@ -181,21 +160,16 @@ void loop() {
 // Conecta ao WiFi
 void connect_WiFi() {
    WiFiManager wm;
-   // wm.resetSettings();
    bool res;
    res = wm.autoConnect("CFE-Hydro");
-   //lcd.clear();
-   LcdMsg(0, 2, "Conectando ao WiFi..");
    if(!res) {
       // wm.resetSettings();
       Serial.println("Falha ao conectar ao WiFi.");
-      LcdMsg(0, 3, "Falha conexao WiFi. ");
       ESP.restart();
       wifi_connected = false;
    }
    else {
       Serial.println("Conectado ao Wifi!");
-      LcdMsg(0, 3, "Conectado ao Wifi!  ");
       Serial.print(WiFi.SSID());  
       Serial.print("  IP: ");
       Serial.println(WiFi.localIP()); 
@@ -207,17 +181,14 @@ void connect_WiFi() {
 void connect_MQTT() {
    while (!mqttClient.connected()) {
       Serial.print("Conectando ao MQTT...");
-      // LcdMsg(0, 2, "Conectando ao MQTT..");
       String clientId = "CFE-HYDRO-";
       clientId += String(random(0xFFFF), HEX);
       
       if (mqttClient.connect(clientId.c_str())) {
          Serial.println("conectado!");
-         // LcdMsg(0, 3, "MQTT Conectado!     ");
          digitalWrite(STATUS_LED, HIGH);
       } else {
          Serial.print("falhou, rc=");
-         // LcdMsg(0, 3, "Falha conexao MQTT. ");
          Serial.print(mqttClient.state());
          Serial.println(" tentando novamente em 5 segundos");
          digitalWrite(STATUS_LED, LOW);
@@ -229,8 +200,6 @@ void connect_MQTT() {
 // Inicializa sensores
 void initSensors() {
     Serial.println("Inicializando sensores...");
-    lcd.clear();
-    LcdMsg(0, 0, "Inicializ. sensores.");
     
     pinMode(TP_SENSOR_PIN, INPUT);
     pinMode(PH_SENSOR_PIN, INPUT);
@@ -241,7 +210,6 @@ void initSensors() {
     analogSetAttenuation(ADC_11db);
     
     Serial.println("Sensores inicializados.");
-    LcdMsg(0, 1, "Sensores OK.");
     delay(1000);
 } // end initSensors()
 
@@ -322,12 +290,6 @@ String formatTimestamp() { // Formata timestamp em string usando NTPClient
    return formatted;
 } // end formatTimestamp()
 
-void LcdMsg(int x, int y, String msg) { // Exibe mensagens no display LCD
-   lcd.setCursor(x, y);
-   lcd.print(msg);
-   delay(500);
-} // end LcdMsg()
-
 void Exibe_Valores_Serial() { // Mostra valores no Monitor Serial
    Serial.print("Timestamp: ");
    Serial.print(timestamp);
@@ -340,23 +302,3 @@ void Exibe_Valores_Serial() { // Mostra valores no Monitor Serial
    Serial.print("  OD: ");
    Serial.println(od_value, 2);
 } // end Exibe_Valores_Serial()
-
-
-void Exibe_Valores_LCD() {    // Mostra valores no display LCD
-   lcd.clear();
-   lcd.setCursor(0, 0);
-   lcd.print("T : ");
-   lcd.print(tp_value,2);
-   lcd.print(" \337C");
-   lcd.setCursor(0, 1);
-   lcd.print("pH: ");
-   lcd.print(ph_value,2);
-   lcd.setCursor(0, 2);
-   lcd.print("EC: ");
-   lcd.print(ec_value,3);
-   lcd.print(" mS/cm");
-   lcd.setCursor(0, 3);
-   lcd.print("OD: ");
-   lcd.print(od_value,2);
-   lcd.print(" mg/L");
-} // end Exibe_Valores_LCD()
